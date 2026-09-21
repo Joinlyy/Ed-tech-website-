@@ -1,0 +1,26 @@
+# Dev profile — in-memory H2. Zero setup, no Docker, no Postgres.
+# Start with: npm run dev:backend:h2   (or: ./gradlew bootRun --args='--spring.profiles.active=dev')
+spring:
+  datasource:
+    url: jdbc:h2:mem:redpen;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH
+    username: sa
+    password: ""
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+    # Hibernate 6 auto-detects H2Dialect — no need to declare it.
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+  h2:
+    console:
+      enabled: true
+      path: /h2
+
+# Dev overrides the default WARN-root — bump our own package to DEBUG so it's
+# easier to trace request handlers. Add org.hibernate.SQL: DEBUG here temporarily
+# if you need to inspect SQL.
+logging:
+  level:
+    com.redpen: DEBUG

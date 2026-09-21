@@ -1,0 +1,18 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: redpen-postgres
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: redpen
+      POSTGRES_USER: redpen
+      POSTGRES_PASSWORD: redpen
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U redpen -d redpen"]
+      interval: 5s
+      timeout: 5s
+      retries: 10

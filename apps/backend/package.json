@@ -1,0 +1,13 @@
+{
+  "name": "redpen-backend",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Thin npm wrapper so the root monorepo can dispatch Gradle commands uniformly.",
+  "scripts": {
+    "dev": "node ./scripts/gradle.js bootRun",
+    "dev:h2": "node ./scripts/gradle.js bootRun --args=--spring.profiles.active=dev",
+    "build": "node ./scripts/gradle.js build",
+    "test": "node ./scripts/gradle.js test",
+    "clean": "node ./scripts/gradle.js clean"
+  }
+}
